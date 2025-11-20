@@ -18,8 +18,15 @@ def get_cart():
     user_id = int(get_jwt_identity())  # Convert string to int
     user = User.query.get(user_id)
 
-    if not user.buyer_profile or not user.buyer_profile.cart:
-        return jsonify({'message': 'Cart not found'}), 404
+    if not user.buyer_profile:
+        return jsonify({'message': 'Buyer profile not found'}), 404
+
+    # Auto-create cart if it doesn't exist
+    if not user.buyer_profile.cart:
+        cart = Cart(buyer_id=user.buyer_profile.id)
+        db.session.add(cart)
+        db.session.commit()
+        return jsonify({'cart': cart.to_dict()}), 200
 
     return jsonify({'cart': user.buyer_profile.cart.to_dict()}), 200
 
@@ -32,8 +39,14 @@ def add_to_cart():
     user = User.query.get(user_id)
     data = request.get_json()
 
-    if not user.buyer_profile or not user.buyer_profile.cart:
-        return jsonify({'message': 'Cart not found'}), 404
+    if not user.buyer_profile:
+        return jsonify({'message': 'Buyer profile not found'}), 404
+
+    # Auto-create cart if it doesn't exist
+    if not user.buyer_profile.cart:
+        cart = Cart(buyer_id=user.buyer_profile.id)
+        db.session.add(cart)
+        db.session.commit()
 
     if not data.get('product_id') or not data.get('quantity'):
         return jsonify({'message': 'Product ID and quantity required'}), 400
