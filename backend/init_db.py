@@ -198,9 +198,12 @@ def seed_users():
 def seed_products():
     """Seed initial products"""
 
-    # Get farmer users
-    farmer1 = User.query.filter_by(email='john.farmer@gmail.com').first()
-    farmer2 = User.query.filter_by(email='jane.farmer@gmail.com').first()
+    # Get farmer profiles
+    farmer1_user = User.query.filter_by(email='john.farmer@gmail.com').first()
+    farmer2_user = User.query.filter_by(email='jane.farmer@gmail.com').first()
+
+    farmer1 = FarmerProfile.query.filter_by(user_id=farmer1_user.id).first()
+    farmer2 = FarmerProfile.query.filter_by(user_id=farmer2_user.id).first()
 
     # Get categories
     vegetables = Category.query.filter_by(name='Vegetables').first()
