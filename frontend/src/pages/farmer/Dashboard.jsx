@@ -167,7 +167,7 @@ export default function FarmerDashboard() {
         {/* Tab Content */}
         <main className="p-6">
           {activeTab === 'overview' && <OverviewTab />}
-          {activeTab === 'products' && <ProductsTab />}
+          {activeTab === 'products' && <ProductsTab getImageUrl={getImageUrl} />}
           {activeTab === 'add-product' && <AddProductTab setActiveTab={setActiveTab} />}
           {activeTab === 'orders' && <OrdersTab />}
           {activeTab === 'messages' && <Messages />}
@@ -291,7 +291,7 @@ function OverviewTab() {
 }
 
 // Products Tab Component
-function ProductsTab() {
+function ProductsTab({ getImageUrl }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingProduct, setEditingProduct] = useState(null);

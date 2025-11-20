@@ -181,7 +181,7 @@ export default function BuyerDashboard() {
 
         {/* Tab Content */}
         <main className="p-6">
-          {activeTab === 'browse' && <BrowseProductsTab fetchCartCount={fetchCartCount} />}
+          {activeTab === 'browse' && <BrowseProductsTab fetchCartCount={fetchCartCount} getImageUrl={getImageUrl} />}
           {activeTab === 'cart' && <CartTab setActiveTab={setActiveTab} fetchCartCount={fetchCartCount} />}
           {activeTab === 'orders' && <OrdersTab />}
           {activeTab === 'messages' && <Messages />}
@@ -193,7 +193,7 @@ export default function BuyerDashboard() {
 }
 
 // Browse Products Tab Component
-function BrowseProductsTab({ fetchCartCount }) {
+function BrowseProductsTab({ fetchCartCount, getImageUrl }) {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
