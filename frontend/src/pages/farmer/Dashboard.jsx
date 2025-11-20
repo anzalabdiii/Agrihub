@@ -24,7 +24,6 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import Messages from '../../components/Messages';
-// Helper function to get full image URLconst getImageUrl = (imageUrl) => {  if (!imageUrl) return null;  if (imageUrl.startsWith("http://") || imageUrl.startsWith("https://")) {    return imageUrl;  }  const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";  const baseUrl = API_BASE_URL.replace("/api", "");  return `${baseUrl}${imageUrl}`;};
 
 export default function FarmerDashboard() {
   const navigate = useNavigate();
@@ -32,6 +31,32 @@ export default function FarmerDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
+
+  // Helper function to get full image URL
+  const getImageUrl = (imageUrl) => {
+    if (!imageUrl) return null;
+
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+      return imageUrl;
+    }
+
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+    const baseUrl = API_BASE_URL.replace('/api', '');
+
+    let fullUrl;
+    if (imageUrl.startsWith('/api/')) {
+      fullUrl = `${baseUrl}${imageUrl}`;
+    } else if (imageUrl.startsWith('/uploads/')) {
+      fullUrl = `${baseUrl}${imageUrl}`;
+    } else if (imageUrl.startsWith('/')) {
+      fullUrl = `${baseUrl}${imageUrl}`;
+    } else {
+      fullUrl = `${baseUrl}/uploads/${imageUrl}`;
+    }
+
+    console.log('Image URL:', imageUrl, '→ Full URL:', fullUrl);
+    return fullUrl;
+  };
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
