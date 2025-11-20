@@ -216,7 +216,7 @@ def seed_products():
             'price': 3.99,
             'quantity': 500,
             'unit': 'kg',
-            'is_organic': True,
+            'product_type': 'produce',
             'is_approved': True
         },
         {
@@ -227,7 +227,7 @@ def seed_products():
             'price': 2.49,
             'quantity': 300,
             'unit': 'head',
-            'is_organic': True,
+            'product_type': 'produce',
             'is_approved': True
         },
         {
@@ -238,7 +238,7 @@ def seed_products():
             'price': 5.99,
             'quantity': 200,
             'unit': 'kg',
-            'is_organic': True,
+            'product_type': 'produce',
             'is_approved': True
         },
         {
@@ -249,7 +249,7 @@ def seed_products():
             'price': 4.50,
             'quantity': 1000,
             'unit': 'kg',
-            'is_organic': True,
+            'product_type': 'produce',
             'is_approved': True
         },
         {
@@ -260,7 +260,7 @@ def seed_products():
             'price': 3.75,
             'quantity': 800,
             'unit': 'kg',
-            'is_organic': True,
+            'product_type': 'produce',
             'is_approved': True
         }
     ]
