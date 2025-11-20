@@ -24,39 +24,38 @@ import {
 import toast from 'react-hot-toast';
 import Messages from '../../components/Messages';
 
-// Helper function to get full image URL
-const getImageUrl = (imageUrl) => {
-  if (!imageUrl) return null;
-
-  // If the URL is already absolute, return it as is
-  if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-    return imageUrl;
-  }
-
-  // Handle different image URL formats
-  const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-  const baseUrl = API_BASE_URL.replace('/api', ''); // Get base URL without /api
-
-  let fullUrl;
-  if (imageUrl.startsWith('/api/')) {
-    // If URL already starts with /api/, use base URL + imageUrl
-    fullUrl = `${baseUrl}${imageUrl}`;
-  } else if (imageUrl.startsWith('/uploads/')) {
-    // If URL starts with /uploads/, use base URL + imageUrl
-    fullUrl = `${baseUrl}${imageUrl}`;
-  } else if (imageUrl.startsWith('/')) {
-    // If URL starts with /, use base URL + imageUrl
-    fullUrl = `${baseUrl}${imageUrl}`;
-  } else {
-    // If no leading slash, assume it's just the filename and add /uploads/
-    fullUrl = `${baseUrl}/uploads/${imageUrl}`;
-  }
-
-  console.log('Image URL:', imageUrl, '→ Full URL:', fullUrl);
-  return fullUrl;
-};
-
 export default function BuyerDashboard() {
+  // Helper function to get full image URL
+  const getImageUrl = (imageUrl) => {
+    if (!imageUrl) return null;
+
+    // If the URL is already absolute, return it as is
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+      return imageUrl;
+    }
+
+    // Handle different image URL formats
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+    const baseUrl = API_BASE_URL.replace('/api', ''); // Get base URL without /api
+
+    let fullUrl;
+    if (imageUrl.startsWith('/api/')) {
+      // If URL already starts with /api/, use base URL + imageUrl
+      fullUrl = `${baseUrl}${imageUrl}`;
+    } else if (imageUrl.startsWith('/uploads/')) {
+      // If URL starts with /uploads/, use base URL + imageUrl
+      fullUrl = `${baseUrl}${imageUrl}`;
+    } else if (imageUrl.startsWith('/')) {
+      // If URL starts with /, use base URL + imageUrl
+      fullUrl = `${baseUrl}${imageUrl}`;
+    } else {
+      // If no leading slash, assume it's just the filename and add /uploads/
+      fullUrl = `${baseUrl}/uploads/${imageUrl}`;
+    }
+
+    console.log('Image URL:', imageUrl, '→ Full URL:', fullUrl);
+    return fullUrl;
+  };
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
   const [activeTab, setActiveTab] = useState('browse');
